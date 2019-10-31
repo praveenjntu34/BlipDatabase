@@ -110,7 +110,7 @@ CREATE TABLE Person(
 )
 
 CREATE TABLE LoginCredential(
- LoginCredential int IDENTITY(1,1)
+ LoginCredentialId int IDENTITY(1,1)
 ,PersonId int
 ,Email nvarchar(60)
 ,PhoneNumber nvarchar(50)
@@ -118,7 +118,7 @@ CREATE TABLE LoginCredential(
 ,PasswordHash nvarchar(128)
 ,PasswordSalt nvarchar(128)
 
-,PRIMARY KEY (LoginCredential)
+,PRIMARY KEY (LoginCredentialId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)         
 )
 
