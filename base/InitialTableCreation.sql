@@ -98,7 +98,7 @@ CREATE TABLE Person(
 ,LastName nvarchar(50) NOT NULL
 ,DateOfBirth datetime
 ,Gender nvarchar(1) NOT NULL
-,PersonTypeId int NOT NULL
+,PersonTypeId int UNIQUE NOT NULL
 ,PhotoStreamId uniqueidentifier
 ,AuditCreatedBy int
 ,AuditCreatedDate datetime
