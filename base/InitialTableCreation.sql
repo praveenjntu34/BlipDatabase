@@ -1,6 +1,6 @@
 
 
---CREATE DATABASE BlipProd
+-- CREATE DATABASE Blip
 
 
 CREATE TABLE PersonType(
@@ -36,7 +36,7 @@ INSERT INTO PostType VALUES
 
 CREATE TABLE Tenant(
  TenantId int IDENTITY(1,1) 
-,TenantName nvarchar(150)
+,TenantName nvarchar(150) NOT NULL
 
 ,PRIMARY KEY (TenantId)
 )
@@ -94,11 +94,11 @@ CREATE TABLE Section(
 
 CREATE TABLE Person(
  PersonId int IDENTITY(1,1) 
-,FirstName nvarchar(50)
-,LastName nvarchar(50)
+,FirstName nvarchar(50) NOT NULL
+,LastName nvarchar(50) NOT NULL
 ,DateOfBirth datetime
-,Gender nvarchar(1)
-,PersonTypeId int
+,Gender nvarchar(1) NOT NULL
+,PersonTypeId int NOT NULL
 ,PhotoStreamId uniqueidentifier
 ,AuditCreatedBy int
 ,AuditCreatedDate datetime
@@ -111,8 +111,8 @@ CREATE TABLE Person(
 
 CREATE TABLE LoginCredential(
  LoginCredentialId int IDENTITY(1,1)
-,PersonId int
-,Email nvarchar(60)
+,PersonId int UNIQUE NOT NULL
+,Email nvarchar(60) 
 ,PhoneNumber nvarchar(50)
 ,Passcode nvarchar(255)
 ,PasswordHash nvarchar(128)
@@ -122,21 +122,14 @@ CREATE TABLE LoginCredential(
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)         
 )
 
-CREATE TABLE SuperAdmin(
- SuperAdminId int IDENTITY(1,1)
-,PersonId int
-
-,PRIMARY KEY (SuperAdminId)
-,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)         
-)
 
 CREATE TABLE InstitutionAdmin(
  InstitutionAdminId int IDENTITY(1,1)
-,PersonId int
+,PersonId int UNIQUE NOT NULL
 ,SecondaryPOCName nvarchar(50)
 ,SecondaryPOCEmail nvarchar(50)
 ,SecondaryPOCPhoneNumber nvarchar(50)
-,RelTenantInstitutionId int         
+,RelTenantInstitutionId int UNIQUE NOT NULL        
 ,PRIMARY KEY (InstitutionAdminId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)  
 ,FOREIGN KEY (RelTenantInstitutionId) REFERENCES RelTenantInstitution(RelTenantInstitutionId)         
@@ -144,8 +137,8 @@ CREATE TABLE InstitutionAdmin(
 
 CREATE TABLE BranchAdmin(
  BranchAdminId int IDENTITY(1,1)
-,PersonId int
-,BranchId int
+,PersonId int UNIQUE NOT NULL
+,BranchId int UNIQUE NOT NULL
  
 ,PRIMARY KEY (BranchAdminId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)  
@@ -154,7 +147,7 @@ CREATE TABLE BranchAdmin(
      
 CREATE TABLE Parent(
  ParentId int IDENTITY(1,1)
-,PersonId int
+,PersonId int UNIQUE NOT NULL
 ,SecondaryPhoneNumber nvarchar(50)
 ,RelTenantInstitutionId int
 
@@ -176,7 +169,7 @@ CREATE TABLE Child(
 
 CREATE TABLE Instructor(
  InstructorId int IDENTITY(1,1)
-,PersonId int
+,PersonId int UNIQUE NOT NULL
 ,SectionId int
 ,PRIMARY KEY (InstructorId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)
@@ -192,7 +185,6 @@ CREATE TABLE Post(
 ,AttachmentStreamId uniqueidentifier
 
 ,PRIMARY KEY (PostId)
-,FOREIGN KEY (PostTypeId) REFERENCES PostType(PostTypeId)
 ,FOREIGN KEY (SectionId) REFERENCES Section(SectionId)
 
 ,AuditCreatedBy int
@@ -251,3 +243,5 @@ CREATE TABLE RelTenantInstitutionAddress(
 ,FOREIGN KEY (RelTenantInstitutionId) REFERENCES RelTenantInstitution(RelTenantInstitutionId)
 ,FOREIGN KEY (AddressId) REFERENCES Address(AddressId)
 )  
+INSERT INTO Person VALUES('Nizam','Syed',null,'M',1,null,0,GETUTCDATE(),0,GETUTCDATE())
+INSERT INTO LoginCredential VALUES(1,'superadmin@gmail.com','9000041105','test',null,null)
