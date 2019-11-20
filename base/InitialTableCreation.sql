@@ -39,13 +39,23 @@ CREATE TABLE Tenant(
 
 ,PRIMARY KEY (TenantId)
 )
+CREATE TABLE Address(
+ AddressId int IDENTITY(1,1)
+,Address1 nvarchar(150)
+,Address2 nvarchar(150)
+,CityId int
+,StateId int
+,CountryId int
+,Pincode nvarchar(6)
 
+,PRIMARY KEY (AddressId)
+) 
 CREATE TABLE Institution(
  InstitutionId int IDENTITY(1,1) 
 ,InstitutionName nvarchar(150)
 ,Email nvarchar(150)
 ,Website nvarchar(100)
-,Status nvarchar(1)
+,Status BIT
 ,Remarks nvarchar(150)
 
 ,PRIMARY KEY (InstitutionId)
@@ -53,13 +63,14 @@ CREATE TABLE Institution(
 
 CREATE TABLE RelTenantInstitution(
  RelTenantInstitutionId int IDENTITY(1,1) 
-,TenantId int
-,InstitutionId int
-,InstitutionTypeId int
-
+,TenantId int UNIQUE 
+,InstitutionId int UNIQUE 
+,InstitutionTypeId int 
+,AddressId int UNIQUE 
 ,PRIMARY KEY (RelTenantInstitutionId)
 ,FOREIGN KEY (TenantId) REFERENCES Tenant(TenantId)
 ,FOREIGN KEY (InstitutionId) REFERENCES Institution(InstitutionId)
+,FOREIGN KEY (AddressId) REFERENCES Address(AddressId)
 )
 
 CREATE TABLE Banner(
@@ -193,17 +204,7 @@ CREATE TABLE Post(
 ,AuditModifiedDate datetime 
 )  
 
-CREATE TABLE Address(
- AddressId int IDENTITY(1,1)
-,Address1 nvarchar(150)
-,Address2 nvarchar(150)
-,CityId int
-,StateId int
-,CountryId int
-,Pincode nvarchar(6)
 
-,PRIMARY KEY (AddressId)
-) 
 
 CREATE TABLE Country(
  CountryId int IDENTITY(1,1)
@@ -231,17 +232,7 @@ CREATE TABLE City(
 ,PRIMARY KEY (CityId)
 ,FOREIGN KEY (StateId) REFERENCES State(StateId)
 ) 
-
-
-CREATE TABLE RelTenantInstitutionAddress(
- RelTenantInstitutionAddress int IDENTITY(1,1)
-,RelTenantInstitutionId  int
-,AddressId int
-
-,PRIMARY KEY (RelTenantInstitutionAddress)
-,FOREIGN KEY (RelTenantInstitutionId) REFERENCES RelTenantInstitution(RelTenantInstitutionId)
-,FOREIGN KEY (AddressId) REFERENCES Address(AddressId)
-)  
+  
 INSERT INTO Person VALUES('Nizam','Syed',null,'M',1,null,0,GETUTCDATE(),0,GETUTCDATE())
 INSERT INTO LoginCredential VALUES(1,'superadmin@gmail.com','9000041105','test',null,null)
 
