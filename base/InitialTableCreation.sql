@@ -63,10 +63,10 @@ CREATE TABLE Institution(
 
 CREATE TABLE RelTenantInstitution(
  RelTenantInstitutionId int IDENTITY(1,1) 
-,TenantId int UNIQUE 
-,InstitutionId int UNIQUE 
-,InstitutionTypeId int 
-,AddressId int UNIQUE 
+,TenantId int UNIQUE NOT NULL
+,InstitutionId int UNIQUE NOT NULL
+,InstitutionTypeId int NOT NULL 
+,AddressId int UNIQUE NOT NULL 
 ,PRIMARY KEY (RelTenantInstitutionId)
 ,FOREIGN KEY (TenantId) REFERENCES Tenant(TenantId)
 ,FOREIGN KEY (InstitutionId) REFERENCES Institution(InstitutionId)

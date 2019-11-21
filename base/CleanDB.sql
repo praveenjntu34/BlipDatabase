@@ -11,3 +11,4 @@ WHERE DBId = DB_ID(@DatabaseName) AND SPId <> @@SPId
 EXEC(@SQL)
 
 drop DATABASE BlipDev
+CREATE DATABASE BlipDev
