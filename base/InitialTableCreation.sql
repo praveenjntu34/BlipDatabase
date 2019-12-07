@@ -5,6 +5,7 @@
 CREATE TABLE PersonType(
  PersonTypeId int IDENTITY(1,1) PRIMARY KEY
 ,PersonTypeName nvarchar(50)
+,Test nvarchar(50)
 )
 
 INSERT INTO PersonType VALUES 
