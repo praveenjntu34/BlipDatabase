@@ -97,7 +97,7 @@ CREATE TABLE Branch(
 CREATE TABLE Section(
  SectionId int IDENTITY(1,1) 
 ,BranchId int
-,BranchName nvarchar(60)
+,SectionName nvarchar(60)
 
 ,PRIMARY KEY (SectionId)
 ,FOREIGN KEY (BranchId) REFERENCES Branch(BranchId)
@@ -109,7 +109,7 @@ CREATE TABLE Person(
 ,LastName nvarchar(50) NOT NULL
 ,DateOfBirth datetime
 ,Gender nvarchar(1) NOT NULL
-,PersonTypeId int UNIQUE NOT NULL
+,PersonTypeId int NOT NULL
 ,PhotoStreamId uniqueidentifier
 ,AuditCreatedBy int
 ,AuditCreatedDate datetime
@@ -117,7 +117,6 @@ CREATE TABLE Person(
 ,AuditModifiedDate datetime
 
 ,PRIMARY KEY (PersonId)
-,FOREIGN KEY (PersonTypeId) REFERENCES PersonType(PersonTypeId)
 )
 
 CREATE TABLE LoginCredential(
