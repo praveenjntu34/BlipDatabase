@@ -50,16 +50,29 @@ CREATE TABLE Address(
 
 ,PRIMARY KEY (AddressId)
 ) 
+
+CREATE TABLE InstitutionDisplayPicture (
+  PictureId int IDENTITY(1,1),
+  FileType nvarchar(50),
+  PictureStream varbinary(max)
+
+  PRIMARY KEY(PictureId)
+)
+
 CREATE TABLE Institution(
  InstitutionId int IDENTITY(1,1) 
 ,InstitutionName nvarchar(150)
+,PictureId int UNIQUE NOT NULL
 ,Email nvarchar(150)
 ,Website nvarchar(100)
 ,Status BIT
 ,Remarks nvarchar(150)
 
 ,PRIMARY KEY (InstitutionId)
+,FOREIGN KEY (PictureId) REFERENCES InstitutionDisplayPicture(PictureId)
 )
+
+
 
 CREATE TABLE RelTenantInstitution(
  RelTenantInstitutionId int IDENTITY(1,1) 
