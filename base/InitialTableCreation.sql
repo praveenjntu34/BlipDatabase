@@ -104,7 +104,6 @@ CREATE TABLE Branch(
 ,BranchName nvarchar(60)
 
 ,PRIMARY KEY (BranchId)
-,FOREIGN KEY (RelTenantInstitutionId) REFERENCES RelTenantInstitution(RelTenantInstitutionId)
 )
 
 CREATE TABLE Section(
@@ -113,7 +112,6 @@ CREATE TABLE Section(
 ,SectionName nvarchar(60)
 
 ,PRIMARY KEY (SectionId)
-,FOREIGN KEY (BranchId) REFERENCES Branch(BranchId)
 )
 
 CREATE TABLE Person(
