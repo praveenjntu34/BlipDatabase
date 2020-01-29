@@ -191,6 +191,7 @@ CREATE TABLE Child(
 CREATE TABLE Instructor(
  InstructorId int IDENTITY(1,1)
 ,PersonId int UNIQUE NOT NULL
+,Designation nvarchar(60)
 ,SectionId int
 ,PRIMARY KEY (InstructorId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)
