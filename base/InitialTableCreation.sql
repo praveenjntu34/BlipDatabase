@@ -192,6 +192,7 @@ CREATE TABLE Instructor(
  InstructorId int IDENTITY(1,1)
 ,PersonId int UNIQUE NOT NULL
 ,Designation nvarchar(60)
+,RelTenantInstitutionId int NOT NULL
 ,SectionId int
 ,PRIMARY KEY (InstructorId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)
