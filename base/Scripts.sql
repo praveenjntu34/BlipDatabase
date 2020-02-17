@@ -9,12 +9,15 @@ select * from InstitutionAdmin
 select B.BranchName, S.SectionName from Branch B
 JOIN Section S ON S.BranchId =  B.BranchId
 
-select I.InstitutionName,P.FirstName as 'PrimaryAdmin', IA.SecondaryPOCName AS 'SecondaryAdmin', b.BranchName as 'Branches', S.SectionName AS 'Sections' from RelTenantInstitution ri
+
+select I.InstitutionId, I.InstitutionName,
+
+P.FirstName as 'PrimaryAdmin', IA.SecondaryPOCName AS 'SecondaryAdmin' from RelTenantInstitution ri
 JOIN Institution I ON I.InstitutionId = ri.InstitutionId
 JOIN InstitutionAdmin IA ON IA.RelTenantInstitutionId = ri.RelTenantInstitutionId
 JOIN Person P ON P.PersonId = IA.PersonId
-JOIN Branch b on b.RelTenantInstitutionId = ri.RelTenantInstitutionId
-LEFT JOIN Section S ON S.BranchId =  b.BranchId
+
+SELECT * FROM LoginCredential
 
 
 SELECT I.InstitutionName, IDP.PictureStream, C.CityName, S.StateName, CN.CountryName FROM RelTenantInstitution RI
@@ -55,3 +58,8 @@ JOIN InstitutionAdmin IA ON IA.RelTenantInstitutionId = RI.RelTenantInstitutionI
 JOIN Person P ON P.PersonId = IA.PersonId
 JOIN LoginCredential LC ON LC.PersonId = P.PersonId
 WHERE RI.RelTenantInstitutionId = 2
+
+
+SELECT * FROM Branch WHERE RelTenantInstitutionId= 1
+
+select branch0_.relTenantInstitutionId as relTenan1_2_, branch0_.branchName as branchNa2_2_ from Branch branch0_ where relTenantInstitutionId=6

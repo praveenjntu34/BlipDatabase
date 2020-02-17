@@ -1,5 +1,5 @@
 DECLARE @DatabaseName nvarchar(50)
-SET @DatabaseName = N'BlipDev'
+SET @DatabaseName = N'BlipLocal'
 
 DECLARE @SQL varchar(max)
 
@@ -10,5 +10,5 @@ WHERE DBId = DB_ID(@DatabaseName) AND SPId <> @@SPId
 --SELECT @SQL 
 EXEC(@SQL)
 
-drop DATABASE BlipDev
-CREATE DATABASE BlipDev
+drop DATABASE BlipLocal
+CREATE DATABASE BlipLocal

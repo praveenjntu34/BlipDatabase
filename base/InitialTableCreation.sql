@@ -1,6 +1,6 @@
 
 
--- CREATE DATABASE BlipDev
+-- CREATE DATABASE BlipLocal
 
 CREATE TABLE PersonType(
  PersonTypeId int IDENTITY(1,1) PRIMARY KEY
@@ -203,9 +203,10 @@ CREATE TABLE Instructor(
 CREATE TABLE Post(
  PostId int IDENTITY(1,1)
 ,PostText  nvarchar(255)
-,PostTypeId int
+,Title nvarchar(80)
 ,SectionId int
-,AttachmentStreamId uniqueidentifier
+,RelTenantInstitutionId int
+,AttachmentStreamId varbinary(max)
 
 ,PRIMARY KEY (PostId)
 ,FOREIGN KEY (SectionId) REFERENCES Section(SectionId)
