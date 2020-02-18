@@ -86,16 +86,16 @@ CREATE TABLE RelTenantInstitution(
 ,FOREIGN KEY (AddressId) REFERENCES Address(AddressId)
 )
 
-CREATE TABLE Banner(
- BannerId int IDENTITY(1,1) 
-,RelTenantInstitutionId int
-,BannerName nvarchar(50)
-,BannerStreamId uniqueidentifier
-
-,PRIMARY KEY (BannerId)
-,FOREIGN KEY (RelTenantInstitutionId) REFERENCES RelTenantInstitution(RelTenantInstitutionId)
+		
+CREATE TABLE Banner(	
+ BannerId int IDENTITY(1,1) 	
+,RelTenantInstitutionId int	
+,Title nvarchar(50)	
+,BannerStream varbinary(max)	
+,SecondaryBanner varbinary(max)	
+,ShortDescription nvarchar(255)	
+,PRIMARY KEY (BannerId)	
 )
-
 
 
 CREATE TABLE Branch(
@@ -193,6 +193,8 @@ CREATE TABLE Child(
 CREATE TABLE Instructor(
  InstructorId int IDENTITY(1,1)
 ,PersonId int UNIQUE NOT NULL
+	,Designation nvarchar(60)	
+,RelTenantInstitutionId int NOT NULL
 ,SectionId int
 ,PRIMARY KEY (InstructorId)
 ,FOREIGN KEY (PersonId) REFERENCES Person(PersonId)
