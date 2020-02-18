@@ -89,11 +89,11 @@ CREATE TABLE RelTenantInstitution(
 CREATE TABLE Banner(
  BannerId int IDENTITY(1,1) 
 ,RelTenantInstitutionId int
-,BannerName nvarchar(50)
-,BannerStreamId uniqueidentifier
-
+,Title nvarchar(50)
+,BannerStream varbinary(max)
+,SecondaryBanner varbinary(max)
+,ShortDescription nvarchar(255)
 ,PRIMARY KEY (BannerId)
-,FOREIGN KEY (RelTenantInstitutionId) REFERENCES RelTenantInstitution(RelTenantInstitutionId)
 )
 
 
