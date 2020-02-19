@@ -182,12 +182,11 @@ CREATE TABLE Child(
  ChildId int IDENTITY(1,1)
 ,ParentId int
 ,ChildrenName nvarchar(50)
-,AdmissionId int
+,AdmissionId nvarchar(50)
 ,SectionId int
 
 ,PRIMARY KEY (ChildId)
 ,FOREIGN KEY (ParentId) REFERENCES Parent(ParentId)
-,FOREIGN KEY (SectionId) REFERENCES Section(SectionId)
 ) 
 
 CREATE TABLE Instructor(
